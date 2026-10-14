@@ -1,6 +1,5 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-
 #include "ShooterProjectile.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
@@ -42,6 +41,7 @@ void AShooterProjectile::BeginPlay()
 	
 	// ignore the pawn that shot this projectile
 	CollisionComponent->IgnoreActorWhenMoving(GetInstigator(), true);
+	CollisionComponent->IgnoreActorWhenMoving(GetOwner(), true);		// AW_ADD
 }
 
 void AShooterProjectile::EndPlay(EEndPlayReason::Type EndPlayReason)
@@ -148,7 +148,15 @@ void AShooterProjectile::ProcessHit(AActor* HitActor, UPrimitiveComponent* HitCo
 		if (HitCharacter != GetOwner() || bDamageOwner)
 		{
 			// apply damage to the character
-			UGameplayStatics::ApplyDamage(HitCharacter, HitDamage, GetInstigator()->GetController(), this, HitDamageType);
+			
+			// AW_DEL
+			//UGameplayStatics::ApplyDamage(HitCharacter, HitDamage, GetInstigator()->GetController(), this, HitDamageType);
+			
+			// AW_ADD {
+			APawn* instigator = GetInstigator();
+			AController* controller = IsValid(instigator) ? instigator->GetController() : nullptr;
+			UGameplayStatics::ApplyDamage(HitCharacter, HitDamage, controller, this, HitDamageType);
+			// AW_ADD }
 		}
 	}
 
