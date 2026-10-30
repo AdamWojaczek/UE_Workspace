@@ -1,11 +1,10 @@
-Binaries
-DerivedDataCache
-Intermediate
-Saved
+/Binaries/
+/Build/
+/DerivedDataCache/
+/Intermediate/
+/Saved/
 .vscode
 .vs
-.vsconfig
-
 *.VC.db
 *.opensdf
 *.opendb
