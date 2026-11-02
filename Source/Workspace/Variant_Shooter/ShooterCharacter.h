@@ -84,9 +84,11 @@ protected:
 public:
 
 	/** Bullet count updated delegate */
+	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FBulletCountUpdatedDelegate OnBulletCountUpdated;
 
 	/** Damaged delegate */
+	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FDamagedDelegate OnDamaged;
 
 public:

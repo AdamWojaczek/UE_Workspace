@@ -17,7 +17,8 @@ public class Workspace : ModuleRules
 			"AIModule",
 			"StateTreeModule",
 			"GameplayStateTreeModule",
-			"UMG",
+            "GameplayTasks",
+            "UMG",
 			"Slate"
 		});
 
