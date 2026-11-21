@@ -2,13 +2,13 @@
 
 UPatrolComponent::UPatrolComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UPatrolComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	ResetPatrol();
+	ApplyStartOrder();
 }
 
 void UPatrolComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -16,10 +16,15 @@ void UPatrolComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UPatrolComponent::ResetPatrol()
+void UPatrolComponent::ApplyStartOrder()
 {
 	Direction = bDescendingOrder ? -1 : 1;
 	CurrentIndex = bDescendingOrder ? PatrolPoints.Num() : -1;
+}
+
+void UPatrolComponent::ResetPatrol()
+{
+	ApplyStartOrder();
 }
 
 bool UPatrolComponent::GetNextLocation(FVector& OutLocation)
